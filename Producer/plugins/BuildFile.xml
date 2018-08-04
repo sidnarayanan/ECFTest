@@ -1,0 +1,9 @@
+<export>
+</export>
+<library   file="*.cc" name="ECFTestProducer_plugins">
+  <use   name="RecoJets/JetProducers"/>
+  <use   name="RecoJets/JetAlgorithms"/>
+  <use   name="ECFTest/Producer"/>
+  <use   name="fastjet"/>
+  <use   name="fastjet-contrib"/>
+</library>

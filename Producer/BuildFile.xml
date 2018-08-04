@@ -1,0 +1,11 @@
+<use   name="root"/>
+<use   name="roofit"/>
+<use   root=""/>
+<use   name="fastjet"/>
+<use   name="fastjet-contrib"/>
+<use   name="RecoJets/JetProducers"/>
+<use   name="RecoJets/JetAlgorithms"/>
+<export>
+  <lib   name="1"/>
+</export>
+<flags CXXFLAGS="-g -Wno-sign-compare -Wno-unused-variable -Wno-unused-but-set-variable  -O2"/>
