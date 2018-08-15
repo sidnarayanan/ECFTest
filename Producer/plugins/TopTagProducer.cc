@@ -111,7 +111,7 @@ void TopTagProducer::produce(edm::Event & iEvent, const edm::EventSetup & iSetup
 
     // soft drop the jet 
     auto& pj(alljets[0]); 
-    auto sd = (*softDrop)(pj);
+    auto sd((*softDrop)(pj));
     auto sdConstituents(sorted_by_pt(sd.constituents()));
 
     // compute tauNs
@@ -122,19 +122,19 @@ void TopTagProducer::produce(edm::Event & iEvent, const edm::EventSetup & iSetup
     vector<PseudoJet> sdConstsFiltered(sdConstituents.begin(), sdConstituents.begin() + nFilter);
     ecfcalc->calculate(sdConstsFiltered);
     ecfs[0]  = get_ecf(1,2,2) / pow(get_ecf(1,2,1),2.00);
-    ecfs[1]  = get_ecf(1,3,3) / get_ecf(2,3,2);
+    ecfs[1]  = get_ecf(1,3,3) / get_ecf(2,3,2);          
     ecfs[2]  = get_ecf(3,3,1) / pow(get_ecf(1,3,3),0.75);
     ecfs[3]  = get_ecf(3,3,1) / pow(get_ecf(2,3,2),0.75);
     ecfs[4]  = get_ecf(3,3,2) / pow(get_ecf(3,3,3),0.50);
     ecfs[5]  = get_ecf(1,4,2) / pow(get_ecf(1,3,1),2.00);
     ecfs[6]  = get_ecf(1,4,3) / pow(get_ecf(1,3,2),2.00);
-    ecfs[7]  = get_ecf(2,4,1) / pow(get_ecf(1,3,1),2.00);
+    ecfs[7]  = get_ecf(2,4,0) / pow(get_ecf(1,3,0),2.00);
     ecfs[8]  = get_ecf(2,4,1) / pow(get_ecf(1,3,1),2.00);
-    ecfs[9]  = get_ecf(2,4,1) / pow(get_ecf(2,3,1),2.00);
+    ecfs[9]  = get_ecf(2,4,1) / pow(get_ecf(2,3,0),2.00);
     ecfs[10] = get_ecf(2,4,2) / pow(get_ecf(1,3,2),2.00);
 
     // compute HEPTopTag
-    PseudoJet httJet = htt->result(pj);
+    PseudoJet httJet(htt->result(pj));
     if (httJet != 0) {
       auto* s(static_cast<fastjet::HEPTopTaggerV2Structure*>(httJet.structure_non_const_ptr()));
       htt_mass = s->top_mass();
